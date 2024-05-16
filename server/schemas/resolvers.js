@@ -1,4 +1,4 @@
-const { User, Thought } = require('../models');
+const { User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -35,7 +35,8 @@ const resolvers = {
       if (context.user) {
         const user =  await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { saveBooks: newBook } }
+          { $addToSet: { savedBooks: newBook } },
+          {new: true}
         );
         return user;
       }
@@ -46,7 +47,8 @@ const resolvers = {
       if (context.user) {
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { saveBook: bookId } }
+          { $pull: { savedBooks: { bookId } } },
+          {new: true}
         );
         return user;
       }
