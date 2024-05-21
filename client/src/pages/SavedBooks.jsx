@@ -20,7 +20,7 @@ const SavedBooks = () => {
   const {loading, data} = useQuery(QUERY_ME)
   const userData = data?.me || {}
   const [RemoveBook] = useMutation(REMOVE_BOOK, {
-refetchQueries: [QUERY_ME, "me"]
+refetchQueries: [{query: QUERY_ME}]
   })
   //const userData = data?.saveBook || {}
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
@@ -34,10 +34,7 @@ refetchQueries: [QUERY_ME, "me"]
 
     try {
        await RemoveBook({variables: {bookId}});
-       //refetch();
-      //const updatedUser = data.RemoveBook;
-      //const updatedUser = await response.json();
-      //setUserData(updatedUser);
+    
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
