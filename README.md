@@ -49,7 +49,7 @@ MIT License - The License file is provided here : (./LICENSE)
 
 ## Screenshot
 
-
+![alt text](book-search-engine.png)
 
 ## Deployed page and Github Repository
 
